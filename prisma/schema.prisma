@@ -87,11 +87,11 @@ model Category {
 
   title       String
   description String
-  store       Store?  @relation(fields: [storeId], references: [id])
-  storeId     String? @map("store_id")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt() @map("updated_at")
+  Store     Store?   @relation(fields: [storeId], references: [id])
+  storeId   String?
 
   @@map("categories")
 }

@@ -6,12 +6,11 @@ import { CreateCategoryDto, UpdateCategoryDto } from './dto/category.dto';
 export class CategoryService {
   constructor(private readonly prismaService: PrismaService) {}
 
-  async getByStoreId(storeId: string) {
-    return await this.prismaService.category.findMany({
-      where: { storeId: storeId },
-    });
-  }
+  async getAll() {
+    const category = await this.prismaService.category.findMany();
 
+    return category;
+  }
   async getById(id: string) {
     const category = await this.prismaService.category.findUnique({
       where: {
@@ -26,18 +25,13 @@ export class CategoryService {
     return category;
   }
 
-  async create(dto: CreateCategoryDto, storeId: string) {
-    try {
-      return this.prismaService.category.create({
-        data: {
-          title: dto.title,
-          description: dto.description,
-          storeId: storeId,
-        },
-      });
-    } catch (e) {
-      throw new NotFoundException('Not valid storeId');
-    }
+  async create(dto: CreateCategoryDto) {
+    return this.prismaService.category.create({
+      data: {
+        title: dto.title,
+        description: dto.description,
+      },
+    });
   }
 
   async update(dto: UpdateCategoryDto, id: string) {

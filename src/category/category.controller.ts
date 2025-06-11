@@ -15,24 +15,20 @@ import { Auth } from '../auth/decorators/auth.decorator';
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
-  @Auth()
-  @Get('by-storeid/:storeId')
-  async getByStoreId(@Param('storeId') id: string): Promise<Category[]> {
-    return this.categoryService.getByStoreId(id);
+  @Get()
+  async getAll(): Promise<Category[]> {
+    return this.categoryService.getAll();
   }
 
-  @Get('by-id/:id')
+  @Get(':id')
   async getById(@Param('id') id: string): Promise<Category> {
     return this.categoryService.getById(id);
   }
 
   @Auth()
-  @Post(':storeId')
-  async create(
-    @Body() dto: CreateCategoryDto,
-    @Param('storeId') storeId: string,
-  ): Promise<Category> {
-    return this.categoryService.create(dto, storeId);
+  @Post()
+  async create(@Body() dto: CreateCategoryDto): Promise<Category> {
+    return this.categoryService.create(dto);
   }
 
   @Auth()
