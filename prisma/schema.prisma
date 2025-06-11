@@ -90,8 +90,7 @@ model Category {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt() @map("updated_at")
-  Store     Store?   @relation(fields: [storeId], references: [id])
-  storeId   String?
+  store     Store[]
 
   @@map("categories")
 }
@@ -105,8 +104,7 @@ model Color {
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt() @map("updated_at")
-  Store     Store?   @relation(fields: [storeId], references: [id])
-  storeId   String?
+  stores    Store[]
 
   @@map("colors")
 }
