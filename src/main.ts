@@ -14,7 +14,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.use(cookieParser());
   app.enableCors({
-    origin: [process.env.CLIENT_URL],
+    // origin: [process.env.CLIENT_URL],
     credentials: true,
     exposedHeaders: ['set-cookie'],
   });
